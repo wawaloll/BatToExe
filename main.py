@@ -5,15 +5,6 @@ import subprocess
 import shutil
 import time
 
-def check_pyinstaller_installed():
-    try:
-        subprocess.run(['pyinstaller', '--version'], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        return True
-    except FileNotFoundError:
-        return False
-
-def install_pyinstaller():
-    subprocess.run(['pip', 'install', 'pyinstaller'], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 def create_python_script(batch_file):
     with open(batch_file, 'r') as file:
@@ -92,10 +83,6 @@ def convert_to_exe(batch_file):
         print(f"Failed to generate executable for {batch_file}")
 
 if __name__ == '__main__':
-    if not check_pyinstaller_installed():
-        install_pyinstaller()
-        print("Installed pyinstaller. Please run the script again.")
-        sys.exit(1)
 
     if len(sys.argv) != 2:
         print("Usage: python main.py <batch_file>")
